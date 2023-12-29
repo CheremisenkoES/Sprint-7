@@ -24,7 +24,7 @@ def register_new_courier_and_return_login_password():
         "firstName": first_name
     }
 
-    response = requests.post(TestAPIBaseLinks.main_url + TestAPICourierLinks.courier_url, data=payload)
+    response = requests.post(TestAPIBaseLinks.MAIN_URL + TestAPICourierLinks.COURIER_URL, data=payload)
     if response.status_code == 201:
         login_pass.append(login)
         login_pass.append(password)
@@ -40,14 +40,14 @@ def non_existing_id_courier():
         "password": courier[1][1]
     }
 
-    courier_signin = requests.post(TestAPIBaseLinks.main_url + TestAPICourierLinks.login_url, data=sign_in)
+    courier_signin = requests.post(TestAPIBaseLinks.MAIN_URL + TestAPICourierLinks.LOGIN_URL, data=sign_in)
     courier_id = courier_signin.json()["id"] + random.randint(1000, 9000)
     return courier_id
 
 
 def return_new_order():
     payload = json.dumps(TestOrder.test_order)
-    response = requests.post(TestAPIBaseLinks.main_url + TestAPIOrdersLinks.main_orders_url, data=payload)
+    response = requests.post(TestAPIBaseLinks.MAIN_URL + TestAPIOrdersLinks.MAIN_ORDERS_URL, data=payload)
     track = response.json()["track"]
     return track
 
